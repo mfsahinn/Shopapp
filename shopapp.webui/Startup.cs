@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using shopapp.data.Abstract;
+using shopapp.data.Concrete.EfCore;
 
 namespace shopapp.webui
 {
@@ -19,8 +21,9 @@ namespace shopapp.webui
         public void ConfigureServices(IServiceCollection services)
         {
             // mvc
-            // razor pages
+            // razor page
             services.AddControllersWithViews();
+            services.AddScoped<IProductRepository, EfCoreProductRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -31,15 +34,15 @@ namespace shopapp.webui
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(
-                    Path.Combine(Directory.GetCurrentDirectory(),"node_modules")),
-                    RequestPath="/modules"                
+                    Path.Combine(Directory.GetCurrentDirectory(), "node_modules")),
+                RequestPath = "/modules"
             });
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-             
+
             app.UseRouting();
 
             // localhost:5000
@@ -53,7 +56,7 @@ namespace shopapp.webui
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern:"{controller=Home}/{action=Index}/{id?}"
+                    pattern: "{controller=Home}/{action=Index}/{id?}"
                 );
             });
         }

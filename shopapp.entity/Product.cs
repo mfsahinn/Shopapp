@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace shopapp.entity
 {
     public class Product
@@ -8,6 +10,7 @@ namespace shopapp.entity
         public string Description { get; set; }
         public string ImageUrl { get; set; }
         public bool IsApproved { get; set; }
-        public int CategoryId { get; set; }
+
+        public List<ProductCategory> ProductCategory { get; set; }
     }
 }

@@ -2,16 +2,11 @@ using System.Collections.Generic;
 using shopapp.entity;
 namespace shopapp.data.Abstract
 {
-    public interface IProductRepository
+    public interface IProductRepository : IRepository<Product>
     {
-        Product GetById(int id);
+        //İnterface i interfaceden türettik.Bu sayede t yerine Product geçmiş oldu.
 
-        List<Product> GetAll();
-
-        void Create(Product entity);
-
-        void Update(Product entity);
-
-        void Delete(int id);
+        //Alttaki method sadece bu interfaceye özgüdür.
+        List<Product> GetPopularProducts();
     }
 }
